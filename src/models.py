@@ -17,3 +17,66 @@ class User(db.Model):
             "email": self.email,
             # do not serialize the password, its a security breach
         }
+    
+class Character(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), unique=False, nullable=False)
+    height = db.Column(db.String(120), unique=False, nullable=False)
+    mass = db.Column(db.String(120), unique=False, nullable=False)
+    hair_color = db.Column(db.String(120), unique=False, nullable=False)
+                           
+    def __repr__(self):
+        return '<Character %r>' % self.name
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "height": self.height,
+            "mass": self.mass,
+            "hair_color": self.hair_color
+           
+        }
+    
+class Planet(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), unique=False, nullable=False)
+    rotation_period = db.Column(db.String(120), unique=False, nullable=False)
+    orbital_period = db.Column(db.String(120), unique=False, nullable=False)
+    diameter = db.Column(db.String(120), unique=False, nullable=False)
+    climate = db.Column(db.String(120), unique=False, nullable=False)
+    gravity = db.Column(db.String(120), unique=False, nullable=False)
+    terrain = db.Column(db.String(120), unique=False, nullable=False)
+    surface_water = db.Column(db.String(120), unique=False, nullable=False)
+    population = db.Column(db.String(120), unique=False, nullable=False)
+                           
+    def __repr__(self):
+        return '<Planet %r>' % self.name
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "rotation_period": self.rotation_period,
+            "orbital_period": self.orbital_period,
+            "diameter": self.diameter,
+            "climate": self.climate,
+            "gravity": self.gravity,
+            "terrain": self.terrain,
+            "surface_water": self.surface_water,
+            "population": self.population
+           
+        }
+    
+class Favorite(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+   
+    
+    def __repr__(self):
+        return '<Favorite %r>' % self.id
+
+    def serialize(self):
+        return {
+            "id": self.id,
+             }
